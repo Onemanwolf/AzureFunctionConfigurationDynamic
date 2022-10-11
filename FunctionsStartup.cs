@@ -21,9 +21,12 @@ namespace Mvp.Function
             string vault = Environment.GetEnvironmentVariable("KeyVault");
             builder.ConfigurationBuilder.AddAzureAppConfiguration(cs).AddAzureKeyVault(
             new Uri(vault),
-            new DefaultAzureCredential(), new AzureKeyVaultConfigurationOptions
+            new DefaultAzureCredential(),
+
+            new AzureKeyVaultConfigurationOptions
             {
-                // ...
+               // Manager = new PrefixKeyVaultSecretManager(secretPrefix),
+               ReloadInterval = TimeSpan.FromMinutes(5)
             });
 
             SecretClientOptions options = new SecretClientOptions()
