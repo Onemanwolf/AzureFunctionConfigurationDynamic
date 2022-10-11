@@ -38,9 +38,10 @@ namespace Mvp.Function
     // Read configuration data
     string keyName = "TestApp:Settings:Message";
     string message = _config[keyName];
+    string secret = _config["Key"];
 
     return message != null
-        ? (ActionResult)new OkObjectResult(message)
+        ? (ActionResult)new OkObjectResult($"Message: {message} : Sercet:{secret}")
         : new BadRequestObjectResult($"Please create a key-value with the key '{keyName}' in App Configuration.");
         }
     }
